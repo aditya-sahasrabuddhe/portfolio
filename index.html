@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-dark-bg"> <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditya Sahasrabuddhe - Portfolio</title>
+
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" type="image/x-icon">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+    // NOTE: Removed the `plugins` array and `require('@tailwindcss/typography')`
+    // as it's not compatible with the CDN build.
+    // Basic prose styling will rely on browser defaults or manual Tailwind classes.
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+                colors: {
+                    // Updated Color Palette: Dark base with earthy green accent
+                    'primary': { // Earthy Green (e.g., Emerald)
+                         DEFAULT: '#10B981', // Emerald 500
+                         '50': '#ECFDF5',
+                         '100': '#D1FAE5',
+                         '200': '#A7F3D0',
+                         '300': '#6EE7B7',
+                         '400': '#34D399',
+                         '500': '#10B981', // Base accent
+                         '600': '#059669',
+                         '700': '#047857',
+                         '800': '#065F46',
+                         '900': '#064E3B',
+                         '950': '#022C22',
+                    },
+                    'secondary': '#A3A3A3', // Neutral Gray for subtle elements
+                    'dark-bg': '#111827', // Dark background (Gray 900)
+                    'dark-card': '#1F2937', // Card background (Gray 800)
+                    'dark-border': '#374151', // Border color (Gray 700)
+                    'light-text': '#F3F4F6', // Light text (Gray 100)
+                    'medium-text': '#9CA3AF', // Medium emphasis text (Gray 400)
+                    'dark-heading': '#FFFFFF', // White headings
+                },
+                animation: {
+                    'fade-in': 'fadeIn 0.5s ease-out forwards',
+                    'subtle-pulse': 'subtlePulse 2.5s infinite ease-in-out', // Subtle pulse for icons
+                },
+                keyframes: {
+                    fadeIn: {
+                        '0%': { opacity: 0, transform: 'translateY(10px)' },
+                        '100%': { opacity: 1, transform: 'translateY(0)' },
+                    },
+                    subtlePulse: { // Keyframes for subtle pulse
+                        '0%, 100%': { transform: 'scale(1)' },
+                        '50%': { transform: 'scale(1.05)' },
+                    }
+                },
+                // NOTE: Typography plugin configuration removed.
+            }
+        },
+        // NOTE: Plugins array removed.
+    }
+    </script>
+
+    <style>
+        html, body {
+            font-family: 'Inter', sans-serif;
+            background-color: theme('colors.dark-bg');
+            color: theme('colors.light-text');
+        }
+        .main-content-area::before { /* Background pattern */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23374151' fill-opacity='0.05'%3E%3Cpath d='M0 50 L50 0 L100 50 L50 100 Z M50 50 L0 100 L100 100 Z'/%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3; z-index: -1; pointer-events: none;
+        }
+        article { display: none; }
+        article.active { display: block; animation: fadeIn 0.5s ease-out forwards; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: theme('colors.dark-bg'); }
+        ::-webkit-scrollbar-thumb { background-color: theme('colors.dark-border'); border-radius: 10px; border: 2px solid theme('colors.dark-bg'); }
+        ::-webkit-scrollbar-thumb:hover { background-color: theme('colors.gray.500'); }
+        aside { transition: max-height 0.5s ease-in-out; }
+        .article-title::after { content: ''; position: absolute; left: 0; bottom: 0; width: 50px; height: 3px; background: theme('colors.primary.DEFAULT'); border-radius: 3px; }
+        .icon-pulse { animation: subtlePulse 2.5s infinite ease-in-out; }
+        /* Updated timeline line style for full width */
+        .timeline-line-full::before {
+            content: ''; position: absolute; top: 0; bottom: 0; left: 1.25rem; /* Corresponds to ml-5 */
+            width: 2px; /* Slightly thicker line */
+            background: linear-gradient(to bottom, transparent, theme('colors.dark-border'), theme('colors.dark-border'), transparent);
+            transform: translateX(-50%); /* Center the line on the margin */
+        }
+        .prose-basic p { margin-bottom: 1em; }
+        .prose-basic ul { list-style: disc; padding-left: 1.5em; margin-bottom: 1em; }
+        .prose-basic li { margin-bottom: 0.5em; }
+        .prose-basic a { color: theme('colors.primary.DEFAULT'); text-decoration: underline; }
+        .prose-basic a:hover { color: theme('colors.primary.400'); }
+        .prose-basic strong { font-weight: 600; color: theme('colors.light-text'); }
+    </style>
+</head>
+
+<body class="antialiased bg-dark-bg">
+
+    <main class="max-w-6xl mx-auto p-4 lg:flex lg:gap-8 lg:py-10 relative main-content-area">
+        <aside data-sidebar class="w-full lg:w-1/3 lg:sticky lg:top-10 bg-dark-card border border-dark-border rounded-2xl p-5 lg:p-6 mb-6 lg:mb-0 overflow-hidden max-h-[130px] lg:max-h-none lg:self-start z-10">
+            <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <div class="w-20 h-20 rounded-full overflow-hidden bg-gradient-to-br from-primary-400 to-primary-600 flex-shrink-0 border-2 border-dark-border">
+                        <img src="./assets/images/profile.jpeg" alt="Aditya Sahasrabuddhe" class="w-full h-full object-cover"
+                             onerror="this.onerror=null; this.src='https://placehold.co/80x80/1F2937/9CA3AF?text=AS';">
+                    </div>
+                    <div class="info-content">
+                        <h1 class="text-xl lg:text-2xl font-bold text-dark-heading" title="Aditya Sahasrabuddhe">Aditya Sahasrabuddhe</h1>
+                        <p class="text-sm text-medium-text mt-1">M.S. Computer Science Student @ Arizona State University</p>
+                    </div>
+                </div>
+                <button data-sidebar-btn class="lg:hidden text-primary p-2 rounded-lg bg-dark-border/50 hover:bg-dark-border">
+                    <ion-icon name="chevron-down" class="w-5 h-5 transition-transform duration-300"></ion-icon>
+                </button>
+            </div>
+
+            <div class="sidebar-info_more mt-4 pt-4 border-t border-dark-border">
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-center gap-3 group">
+                        <div class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-primary flex-shrink-0 group-hover:scale-110 transition-transform">
+                            <ion-icon name="mail-outline" class="w-4 h-4"></ion-icon>
+                        </div>
+                        <div class="truncate">
+                            <p class="text-xs text-medium-text">Email</p>
+                            <a href="mailto:adityabs2k@gmail.com" class="text-light-text hover:text-primary transition-colors break-all">adityabs2k@gmail.com</a>
+                        </div>
+                    </li>
+                     <li class="flex items-center gap-3 group">
+                        <div class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-primary flex-shrink-0 group-hover:scale-110 transition-transform">
+                            <ion-icon name="call-outline" class="w-4 h-4"></ion-icon>
+                        </div>
+                        <div class="truncate">
+                            <p class="text-xs text-medium-text">Phone</p>
+                            <a href="tel:+16026386536" class="text-light-text hover:text-primary transition-colors break-all">(602) 638-6536</a>
+                        </div>
+                    </li>
+                    <li class="flex items-center gap-3 group">
+                        <div class="w-8 h-8 rounded-lg bg-dark-bg border border-dark-border flex items-center justify-center text-primary flex-shrink-0 group-hover:scale-110 transition-transform">
+                            <ion-icon name="location-outline" class="w-4 h-4"></ion-icon>
+                        </div>
+                        <div class="truncate">
+                            <p class="text-xs text-medium-text">Location</p>
+                            <address class="text-light-text not-italic">Arizona, USA</address>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="my-4 h-px bg-dark-border"></div>
+                <ul class="flex justify-center lg:justify-start gap-4">
+                    <li><a href="https://github.com/aditya-sahasrabuddhe" target="_blank" rel="noopener noreferrer" class="text-medium-text hover:text-primary transition-transform hover:scale-110 inline-block" title="GitHub"><ion-icon name="logo-github" class="w-5 h-5"></ion-icon></a></li>
+                    <li><a href="https://linkedin.com/in/adityabs2k" target="_blank" rel="noopener noreferrer" class="text-medium-text hover:text-primary transition-transform hover:scale-110 inline-block" title="LinkedIn"><ion-icon name="logo-linkedin" class="w-5 h-5"></ion-icon></a></li>
+                    <!-- <li><a href="#" target="_blank" rel="noopener noreferrer" class="text-medium-text hover:text-primary transition-transform hover:scale-110 inline-block" title="Twitter/X"><ion-icon name="logo-twitter" class="w-5 h-5"></ion-icon></a></li> -->
+                    <li><a href="#" target="_blank" rel="noopener noreferrer" class="text-medium-text hover:text-primary transition-transform hover:scale-110 inline-block" title="Personal Website"><ion-icon name="globe-outline" class="w-5 h-5"></ion-icon></a></li>
+                </ul>
+
+                <div class="mt-6">
+                     <a href="./assets/Resume.pdf" target="_blank" rel="noopener noreferrer"
+                        class="block w-full text-center bg-primary hover:bg-primary-700 text-white font-medium py-2.5 px-4 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/30">
+                         View Resume
+                     </a>
+                 </div>
+            </div>
+        </aside>
+
+        <div class="main-content w-full lg:w-2/3 z-0">
+            <nav class="bg-dark-card border border-dark-border rounded-2xl p-2 mb-6 sticky top-4 z-20 backdrop-blur-sm bg-opacity-80 shadow-lg shadow-dark-bg/30">
+                <ul class="flex flex-wrap justify-center lg:justify-start gap-1">
+                    <li><button class="navbar-link active" data-nav-link>About</button></li>
+                    <li><button class="navbar-link" data-nav-link>Experience</button></li>
+                    <li><button class="navbar-link" data-nav-link>Education</button></li>
+                    <!-- <li><button class="navbar-link" data-nav-link>Projects</button></li> -->
+                    <li><button class="navbar-link" data-nav-link>Wellness & Adventure</button></li>
+                    <li><button class="navbar-link" data-nav-link>Contact</button></li>
+                </ul>
+                <style> /* Keep Navbar styles scoped */
+                    .navbar-link { padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; color: theme('colors.medium-text'); border-radius: 0.5rem; transition: color 0.3s ease, background-color 0.3s ease; white-space: nowrap; }
+                    .navbar-link:hover { color: theme('colors.light-text'); background-color: theme('colors.dark-border'); }
+                    .navbar-link.active { color: theme('colors.primary.DEFAULT'); background-color: theme('colors.primary.950'); }
+                 </style>
+            </nav>
+
+            <article class="about active bg-dark-card border border-dark-border rounded-2xl p-5 lg:p-8 mb-6 shadow-lg" data-page="about">
+                <header class="mb-6">
+                    <h2 class="text-2xl lg:text-3xl font-bold text-dark-heading article-title relative pb-2">About Me</h2>
+                </header>
+                <section class="prose-basic text-sm md:text-base max-w-none text-medium-text space-y-4">
+                    <p>Hi, I'm Aditya Sahasrabuddhe, a motivated Computer Science graduate student at Arizona State University, currently holding an Engineering Graduate Fellowship. With prior experience as a Software Developer at Metrum AI and a Projects Intern at L&T Electrical and Automation, I possess a strong foundation in software development, AI/ML model implementation, and automation systems.</p>
+                    <p>My background includes leading and contributing to diverse projects, from chemical spill detection using NVIDIA Isaac Sim and vision models (YOLOv8) to developing multimodal AI interactions, custom voice assistants (integrating OpenAI Whisper), and fine-tuning LLM chatbots. I am proficient in Python, Java, C++, and various tools like GStreamer, Docker, and NVIDIA Omniverse.</p>
+                    <p>I am passionate about leveraging technology to create impactful solutions, particularly in areas involving AI workloads, simulation, and automation. Beyond the screen, I thrive in the outdoors and am dedicated to personal wellness. I am eager to apply my skills and continue learning in challenging software development roles.</p>
+                </section>
+
+                <section class="mt-8 pt-6 border-t border-dark-border">
+                    <h3 class="text-xl lg:text-2xl font-semibold text-dark-heading mb-5">Technical Skills</h3>
+                     <div class="flex flex-wrap gap-2 items-center text-sm">
+                        <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white" alt="HTML5">
+                        <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E" alt="JavaScript">
+                        <img src="https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54" alt="Python">
+                        <img src="https://img.shields.io/badge/Windows%20Terminal-%234D4D4D.svg?style=flat&logo=windows-terminal&logoColor=white" alt="Windows Terminal">
+                        <img src="https://img.shields.io/badge/c++-%2300599C.svg?style=flat&logo=c%2B%2B&logoColor=white" alt="C++">
+                        <img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=flat&logo=amazon-aws&logoColor=white" alt="AWS">
+                        <img src="https://img.shields.io/badge/azure-%230072C6.svg?style=flat&logo=microsoftazure&logoColor=white" alt="Azure">
+                        <img src="https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=flat&logo=google-cloud&logoColor=white" alt="Google Cloud">
+                        <img src="https://img.shields.io/badge/Apache%20Kafka-000?style=flat&logo=apachekafka" alt="Apache Kafka">
+                        <img src="https://img.shields.io/badge/cuda-000000.svg?style=flat&logo=nVIDIA&logoColor=green" alt="CUDA">
+                        <img src="https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi" alt="FastAPI">
+                        <img src="https://img.shields.io/badge/opencv-%23white.svg?style=flat&logo=opencv&logoColor=white" alt="OpenCV">
+                        <img src="https://img.shields.io/badge/ros-%230A0FF9.svg?style=flat&logo=ros&logoColor=white" alt="ROS">
+                        <img src="https://img.shields.io/badge/InfluxDB-22ADF6?style=flat&logo=InfluxDB&logoColor=white" alt="InfluxDB">
+                        <img src="https://img.shields.io/badge/mysql-4479A1.svg?style=flat&logo=mysql&logoColor=white" alt="MySQL">
+                        <img src="https://img.shields.io/badge/redis-%23DD0031.svg?style=flat&logo=redis&logoColor=white" alt="Redis">
+                        <!-- <img src="https://img.shields.io/badge/Canva-%2300C4CC.svg?style=flat&logo=Canva&logoColor=white" alt="Canva"> -->
+                        <!-- <img src="https://img.shields.io/badge/blender-%23F5792A.svg?style=flat&logo=blender&logoColor=white" alt="Blender"> -->
+                        <!-- <img src="https://img.shields.io/badge/Adobe%20Premiere%20Pro-9999FF.svg?style=flat&logo=Adobe%20Premiere%20Pro&logoColor=white" alt="Adobe Premiere Pro"> -->
+                        <img src="https://img.shields.io/badge/numpy-%23013243.svg?style=flat&logo=numpy&logoColor=white" alt="NumPy">
+                        <img src="https://img.shields.io/badge/pandas-%23150458.svg?style=flat&logo=pandas&logoColor=white" alt="Pandas">
+                        <img src="https://img.shields.io/badge/Plotly-%233F4F75.svg?style=flat&logo=plotly&logoColor=white" alt="Plotly">
+                        <img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=flat&logo=PyTorch&logoColor=white" alt="PyTorch">
+                        <img src="https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=flat&logo=scikit-learn&logoColor=white" alt="Scikit-learn">
+                        <img src="https://img.shields.io/badge/TensorFlow-%23FF6F00.svg?style=flat&logo=TensorFlow&logoColor=white" alt="TensorFlow">
+                        <img src="https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=flat&logo=Matplotlib&logoColor=black" alt="Matplotlib">
+                        <img src="https://img.shields.io/badge/git-%23F05033.svg?style=flat&logo=git&logoColor=white" alt="Git">
+                        <img src="https://img.shields.io/badge/docker-%230db7ed.svg?style=flat&logo=docker&logoColor=white" alt="Docker">
+                        <img src="https://shields.io/badge/FFmpeg-%23171717.svg?logo=ffmpeg&style=flat&labelColor=171717&logoColor=5cb85c" alt="FFmpeg">
+                        <img src="https://img.shields.io/badge/grafana-%23F46800.svg?style=flat&logo=grafana&logoColor=white" alt="Grafana">
+                        <!-- <img src="https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=flat&logo=kubernetes&logoColor=white" alt="Kubernetes"> -->
+                        <img src="https://img.shields.io/badge/mosquitto-%233C5280.svg?style=flat&logo=eclipsemosquitto&logoColor=white" alt="Mosquitto">
+                        <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white" alt="Postman">
+                        <img src="https://img.shields.io/badge/-Raspberry_Pi-C51A4A?style=flat&logo=Raspberry-Pi" alt="Raspberry Pi">
+                        <img src="https://img.shields.io/badge/nVIDIA-%2376B900.svg?style=flat&logo=nVIDIA&logoColor=white" alt="nVIDIA">
+                    </div>
+
+                </section>
+            </article>
+
+            <article class="wellness & adventure bg-dark-card border border-dark-border rounded-2xl p-5 lg:p-8 mb-6 shadow-lg" data-page="wellness and adventure">
+                <header class="mb-6">
+                    <h2 class="text-2xl lg:text-3xl font-bold text-dark-heading article-title relative pb-2">Beyond the Code</h2>
+                </header>
+                <section class="prose-basic text-sm md:text-base max-w-none text-medium-text space-y-4">
+                    <p>While I'm deeply passionate about technology and software development, I believe in maintaining a balanced life. Staying active and exploring the outdoors fuels my creativity and problem-solving abilities.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-6 text-center">
+                        <div class="flex flex-col items-center p-4 bg-dark-bg rounded-lg border border-dark-border hover:border-primary transition-colors">
+                            <ion-icon name="walk-outline" class="w-10 h-10 text-primary mb-2 icon-pulse"></ion-icon>
+                            <h4 class="font-semibold text-light-text mb-1">Avid Hiker</h4>
+                            <p class="text-xs text-medium-text">Exploring trails and embracing nature's challenges.</p>
+                        </div>
+                         <div class="flex flex-col items-center p-4 bg-dark-bg rounded-lg border border-dark-border hover:border-primary transition-colors">
+                            <ion-icon name="barbell-outline" class="w-10 h-10 text-primary mb-2 icon-pulse"></ion-icon>
+                            <h4 class="font-semibold text-light-text mb-1">Fitness Enthusiast</h4>
+                            <p class="text-xs text-medium-text">Committed to daily workouts for physical and mental strength.</p>
+                        </div>
+                         <div class="flex flex-col items-center p-4 bg-dark-bg rounded-lg border border-dark-border hover:border-primary transition-colors">
+                             <ion-icon name="leaf-outline" class="w-10 h-10 text-primary mb-2 icon-pulse"></ion-icon> <h4 class="font-semibold text-light-text mb-1">Certified Yoga Instructor</h4>
+                            <p class="text-xs text-medium-text">Sharing the practice of mindfulness and flexibility.</p>
+                        </div>
+                    </div>
+                    <p>My dedication to wellness, including my journey to becoming a Certified Yoga Instructor, reflects my discipline, focus, and commitment to continuous self-improvement – qualities I bring to every aspect of my life, including my professional work.</p>
+                </section>
+            </article>
+
+            <article class="experience bg-dark-card border border-dark-border rounded-2xl p-5 lg:p-8 mb-6 shadow-lg" data-page="experience">
+                <header class="mb-6">
+                    <h2 class="text-2xl lg:text-3xl font-bold text-dark-heading article-title relative pb-2">Experience</h2>
+                </header>
+                <section class="relative space-y-8 timeline-line-full">
+                    <div class="relative flex items-start space-x-5 group">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-dark-border bg-dark-bg text-primary shrink-0 transition-transform shadow-md group-hover:scale-110 z-10">
+                            <ion-icon name="briefcase-outline" class="w-5 h-5"></ion-icon>
+                        </div>
+                        <div class="flex-grow bg-dark-bg p-4 rounded-lg border border-dark-border shadow-lg group-hover:border-primary transition-colors">
+                            <img src="assets/images/metrum_logo_white_new.png" alt="Metrum Logo" class="w-40 mb-2">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 sm:space-x-2 mb-1">
+                                <h4 class="font-semibold text-light-text">Applied AI SWE</h4>
+                                <time class="font-medium text-primary text-xs whitespace-nowrap">Aug 2022 - Jul 2024, May 2025 - Present</time>
+                            </div>
+                            <p class="text-sm font-medium text-medium-text mb-2">Metrum AI, Austin, TX, USA</p>
+                            <ul class="prose-basic text-xs text-medium-text list-disc pl-4 space-y-1.5">
+                                <li>Led chemical spill detection project (NVIDIA Isaac Sim, Nova Carter, Create XR) showcased at Dell Tech World 2024, increasing company outreach by 20%.</li>
+                                <li>Developed multimodal AI for automated drive-thru interactions.</li>
+                                <li>Built custom voice assistant using OpenAI Whisper & GStreamer (80-90% accuracy).</li>
+                                <li>Collaborated on LLM chatbots (including fine-tuned versions), boosting client efficiency by 30%.</li>
+                                <li>Trained YOLOv8-Seg for custom object detection (93% accuracy).</li>
+                                <li>Created applications for parallel video inference (traffic violation detection - 86%) and factory worker monitoring (social distancing, access control).</li>
+                                <li>Initiated code reviews and mentored interns.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="relative flex items-start space-x-5 group">
+                         <div class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-dark-border bg-dark-bg text-primary shrink-0 transition-transform shadow-md group-hover:scale-110 z-10">
+                             <ion-icon name="briefcase-outline" class="w-5 h-5"></ion-icon>
+                        </div>
+                         <div class="flex-grow bg-dark-bg p-4 rounded-lg border border-dark-border shadow-lg group-hover:border-primary transition-colors">
+                            <img src="assets/images/LT.png" alt="LT Logo" class="w-14 mb-2">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 sm:space-x-2 mb-1">
+                                <h4 class="font-semibold text-light-text">Projects Intern (Automation)</h4>
+                                <time class="font-medium text-primary text-xs whitespace-nowrap">Aug 2021 - Jan 2022</time>
+                            </div>
+                            <p class="text-sm font-medium text-medium-text mb-2">L&T Electrical and Automation, Dubai, UAE</p>
+                            <ul class="prose-basic text-xs text-medium-text list-disc pl-4 space-y-1.5">
+                                <li>Researched PLC and SCADA systems for automating Etihad Rail freight facilities.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+             <article class="education bg-dark-card border border-dark-border rounded-2xl p-5 lg:p-8 mb-6 shadow-lg" data-page="education">
+                <header class="mb-6">
+                    <h2 class="text-2xl lg:text-3xl font-bold text-dark-heading article-title relative pb-2">Education</h2>
+                </header>
+                 <section class="relative space-y-8 timeline-line-full">
+                    <div class="relative flex items-start space-x-5 group">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-dark-border bg-dark-bg text-primary shrink-0 transition-transform shadow-md group-hover:scale-110 z-10">
+                            <ion-icon name="school-outline" class="w-5 h-5"></ion-icon>
+                        </div>
+                        <div class="flex-grow bg-dark-bg p-4 rounded-lg border border-dark-border shadow-lg group-hover:border-primary transition-colors">
+                            <img src="assets/images/ASU.png" alt="ASU Logo" class="w-20 mb-2">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 sm:space-x-2 mb-1">
+                                <h4 class="font-semibold text-light-text">Master of Science in Computer Science</h4>
+                                <time class="font-medium text-primary text-xs whitespace-nowrap">Expected May 2026</time>
+                            </div>
+                            <p class="text-sm font-medium text-medium-text mb-2">Arizona State University, Arizona, USA</p>
+                            <p class="text-xs text-medium-text">GPA: 4.0/4.0 <br> Awarded the Engineering Graduate Fellowship</p>
+                        </div>
+                    </div>
+                    <div class="relative flex items-start space-x-5 group">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-dark-border bg-dark-bg text-primary shrink-0 transition-transform shadow-md group-hover:scale-110 z-10">
+                             <ion-icon name="school-outline" class="w-5 h-5"></ion-icon>
+                        </div>
+                        <div class="flex-grow bg-dark-bg p-4 rounded-lg border border-dark-border shadow-lg group-hover:border-primary transition-colors">
+                            <img src="assets/images/BITS.png" alt="Bits Logo" class="w-14 mb-2"> 
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-1 sm:space-y-0 sm:space-x-2 mb-1">
+                                <h4 class="font-semibold text-light-text">Bachelor of Engineering, Computer Science</h4>
+                                <time class="font-medium text-primary text-xs whitespace-nowrap">Graduated June 2022</time>
+                            </div>
+                            <p class="text-sm font-medium text-medium-text mb-2">BITS Pilani - Dubai, UAE</p>
+                            <p class="text-xs text-medium-text">CGPA: 8.18/10 <br> Awarded the Merit Scholarship</p>
+                        </div>
+                    </div>
+                 </section>
+            </article>
+
+            <!-- <article class="projects bg-dark-card border border-dark-border rounded-2xl p-5 lg:p-8 mb-6 shadow-lg" data-page="projects">
+                <header class="mb-6">
+                    <h2 class="text-2xl lg:text-3xl font-bold text-dark-heading article-title relative pb-2">Projects</h2>
+                </header>
+                <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-dark-bg border border-dark-border rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-xl hover:border-primary/50">
+                        <div class="h-40 bg-dark-border flex items-center justify-center text-medium-text overflow-hidden">
+                             <ion-icon name="image-outline" class="w-16 h-16 opacity-50 group-hover:scale-110 transition-transform"></ion-icon>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="text-lg font-semibold text-light-text mb-1 group-hover:text-primary transition-colors">Image Classification using CNN</h4>
+                            <p class="text-xs text-medium-text mb-2">Academic Project</p>
+                            <p class="text-sm text-medium-text mb-3">Built a CNN model focused on classifying different types of animals, achieving 90% accuracy.</p>
+                            <p class="text-xs text-medium-text mb-3 flex flex-wrap gap-1">
+                                <span class="font-semibold text-primary mr-1">Tech:</span>
+                                <span class="tech-tag">Python</span> <span class="tech-tag">CNN</span> <span class="tech-tag">TensorFlow/Keras</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bg-dark-bg border border-dark-border rounded-lg overflow-hidden group transition-all duration-300 hover:shadow-xl hover:border-primary/50">
+                         <div class="h-40 bg-dark-border flex items-center justify-center text-medium-text overflow-hidden">
+                              <ion-icon name="game-controller-outline" class="w-16 h-16 opacity-50 group-hover:scale-110 transition-transform"></ion-icon>
+                         </div>
+                        <div class="p-4">
+                             <h4 class="text-lg font-semibold text-light-text mb-1 group-hover:text-primary transition-colors">Game Development (2048 Tile Solver)</h4>
+                             <p class="text-xs text-medium-text mb-2">Academic Project</p>
+                            <p class="text-sm text-medium-text mb-3">Generated a heuristic search algorithm for an AI agent to solve the 2048 Tile game, achieving decision-making speeds 6x faster than average human players.</p>
+                             <p class="text-xs text-medium-text mb-3 flex flex-wrap gap-1">
+                                <span class="font-semibold text-primary mr-1">Tech:</span>
+                                <span class="tech-tag">Python/C++</span> <span class="tech-tag">AI Algorithms</span> <span class="tech-tag">Heuristics</span>
+                             </p>
+                        </div>
+                    </div>
+                    <style>
+                        .tech-tag { background-color: theme('colors.dark-border'); color: theme('colors.medium-text'); padding: 0.1rem 0.5rem; border-radius: 0.25rem; font-size: 0.7rem; }
+                    </style>
+                </section>
+                 <p class="text-center text-medium-text text-sm mt-8">More project details available upon request.</p>
+            </article> -->
+
+            <article class="contact bg-dark-card border border-dark-border rounded-2xl p-5 lg:p-8 mb-6 shadow-lg" data-page="contact">
+                <header class="mb-6">
+                    <h2 class="text-2xl lg:text-3xl font-bold text-dark-heading article-title relative pb-2">Get In Touch</h2>
+                </header>
+                <section class="contact-form">
+                    <p class="text-medium-text mb-6">Have a question, opportunity, or just want to connect? Feel free to send me a message!</p>
+                    <form action="https://formspree.io/f/mpwdnnzp" method="POST" class="space-y-4">
+                        <!-- Optional: Subject for the email -->
+                        <input type="hidden" name="_subject" value="New message from your portfolio!" />
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                            <label for="fullname" class="block text-sm font-medium text-medium-text mb-1">Full Name</label>
+                            <input type="text" id="fullname" name="fullname" required
+                                    placeholder="Your Name"
+                                    class="w-full p-2.5 bg-dark-bg border border-dark-border rounded-lg text-light-text placeholder-gray-500 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-colors">
+                            </div>
+                            <div>
+                            <label for="email" class="block text-sm font-medium text-medium-text mb-1">Email Address</label>
+                            <input type="email" id="email" name="email" required
+                                    placeholder="your.email@example.com"
+                                    class="w-full p-2.5 bg-dark-bg border border-dark-border rounded-lg text-light-text placeholder-gray-500 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-colors">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-medium-text mb-1">Message</label>
+                            <textarea id="message" name="message" rows="4" required
+                                    placeholder="Your message..."
+                                    class="w-full p-2.5 bg-dark-bg border border-dark-border rounded-lg text-light-text placeholder-gray-500 focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-colors resize-none"></textarea>
+                        </div>
+
+                        <div>
+                            <button type="submit"
+                                    class="w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-primary text-white font-medium rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-card focus:ring-primary transition-all duration-300 hover:shadow-lg hover:shadow-primary/40">
+                            <ion-icon name="paper-plane-outline" class="w-4 h-4"></ion-icon>
+                            <span>Send Message</span>
+                            </button>
+                        </div>
+                        </form>
+                </section>
+            </article>
+
+        </div> </main> <script>
+        'use strict';
+        // Get references to DOM elements
+        const sidebar = document.querySelector("[data-sidebar]");
+        const sidebarBtn = document.querySelector("[data-sidebar-btn]");
+        const form = document.querySelector("[data-form]");
+        const formInputs = document.querySelectorAll("[data-form-input]");
+        const formBtn = document.querySelector("[data-form-btn]");
+        const navigationLinks = document.querySelectorAll("[data-nav-link]");
+        const pages = document.querySelectorAll("[data-page]");
+
+        // --- Sidebar Toggle Functionality ---
+        if (sidebar && sidebarBtn) {
+            sidebarBtn.addEventListener("click", function () {
+                const icon = sidebarBtn.querySelector('ion-icon');
+                const isCollapsed = !sidebar.style.maxHeight || sidebar.style.maxHeight === '130px';
+                if (isCollapsed) {
+                    sidebar.style.maxHeight = sidebar.scrollHeight + "px";
+                    if(icon) icon.style.transform = 'rotate(180deg)';
+                } else {
+                    sidebar.style.maxHeight = '130px';
+                    if(icon) icon.style.transform = 'rotate(0deg)';
+                }
+            });
+             window.addEventListener('resize', () => {
+                const icon = sidebarBtn.querySelector('ion-icon');
+                if (window.innerWidth >= 1024) {
+                    sidebar.style.maxHeight = null;
+                    if(icon) icon.style.transform = 'rotate(0deg)';
+                } else {
+                     if (sidebar.style.maxHeight && sidebar.style.maxHeight !== '130px') {
+                         sidebar.style.maxHeight = sidebar.scrollHeight + "px";
+                     } else {
+                         sidebar.style.maxHeight = '130px';
+                     }
+                }
+            });
+        }
+
+        // --- Contact Form Validation ---
+        if (formInputs.length > 0 && form && formBtn) {
+            formInputs.forEach(input => {
+                input.addEventListener("input", function () {
+                    formBtn.disabled = !form.checkValidity();
+                });
+            });
+             form.addEventListener('submit', (e) => {
+                 if (form.checkValidity()) {
+                    formBtn.disabled = true;
+                    const btnSpan = formBtn.querySelector('span');
+                    if (btnSpan) btnSpan.textContent = 'Sending...';
+                    // Add actual form submission logic here
+                 }
+             });
+        }
+
+        // --- Page Navigation Logic ---
+        if (navigationLinks.length > 0 && pages.length > 0) {
+            navigationLinks.forEach(link => {
+                link.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    let targetPageName = this.textContent.trim().toLowerCase().replace(/&/g, 'and');
+
+                    pages.forEach(page => page.classList.remove("active"));
+                    navigationLinks.forEach(navLink => navLink.classList.remove("active"));
+
+                    const targetPage = document.querySelector(`[data-page="${targetPageName}"]`);
+                    if (targetPage) {
+                        targetPage.classList.add("active");
+                        this.classList.add("active");
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        console.warn(`Page with data-page="${targetPageName}" not found.`);
+                        if (pages[0]) pages[0].classList.add("active");
+                        if (navigationLinks[0]) navigationLinks[0].classList.add("active");
+                    }
+
+                    if (window.innerWidth < 1024 && sidebar && sidebar.style.maxHeight && sidebar.style.maxHeight !== '130px') {
+                         sidebar.style.maxHeight = '130px';
+                         const icon = sidebarBtn.querySelector('ion-icon');
+                         if(icon) icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+        }
+
+        // --- Initial Page Load Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstPage = document.querySelector('[data-page="about"]') || pages[0];
+            const firstLink = Array.from(navigationLinks).find(link => link.textContent.trim().toLowerCase() === 'about') || navigationLinks[0];
+
+            pages.forEach(page => page.classList.remove("active"));
+            navigationLinks.forEach(navLink => navLink.classList.remove("active"));
+
+            if (firstPage) firstPage.classList.add('active');
+            if (firstLink) firstLink.classList.add('active');
+
+             if (window.innerWidth < 1024) {
+                 if(sidebar) sidebar.style.maxHeight = '130px';
+             } else {
+                  if(sidebar) sidebar.style.maxHeight = null;
+             }
+        });
+    </script>
+
+</body>
+</html>
