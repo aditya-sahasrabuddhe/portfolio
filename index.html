@@ -192,11 +192,30 @@
                     <li><button class="navbar-link" data-nav-link>Wellness & Adventure</button></li>
                     <li><button class="navbar-link" data-nav-link>Contact</button></li>
                 </ul>
-                <style> /* Keep Navbar styles scoped */
-                    .navbar-link { padding: 0.5rem 1rem; font-size: 0.875rem; font-weight: 500; color: theme('colors.medium-text'); border-radius: 0.5rem; transition: color 0.3s ease, background-color 0.3s ease; white-space: nowrap; }
-                    .navbar-link:hover { color: theme('colors.light-text'); background-color: theme('colors.dark-border'); }
-                    .navbar-link.active { color: theme('colors.primary.DEFAULT'); background-color: theme('colors.primary.950'); }
-                 </style>
+                <style>
+                    .navbar-link {
+                        padding: 0.5rem 1rem;
+                        font-size: 0.875rem;
+                        font-weight: 500;
+                        color: #9CA3AF; /* medium-text color */
+                        border-radius: 9999px; /* pill shape */
+                        transition: all 0.3s ease;
+                        white-space: nowrap;
+                        background-color: transparent;
+                    }
+
+                    .navbar-link:hover {
+                        background-color: rgba(255, 255, 255, 0.05);
+                        color: #F3F4F6; /* light-text color */
+                    }
+
+                    .navbar-link.active {
+                        color: #10B981; /* primary emerald */
+                        background-color: rgba(16, 185, 129, 0.15);
+                        box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+                        font-weight: 600;
+                    }
+                </style>
             </nav>
 
             <article class="about active bg-dark-card border border-dark-border rounded-2xl p-5 lg:p-8 mb-6 shadow-lg" data-page="about">
@@ -220,7 +239,7 @@
                         <img src="https://img.shields.io/badge/AWS-%23FF9900.svg?style=flat&logo=amazon-aws&logoColor=white" alt="AWS">
                         <img src="https://img.shields.io/badge/azure-%230072C6.svg?style=flat&logo=microsoftazure&logoColor=white" alt="Azure">
                         <img src="https://img.shields.io/badge/GoogleCloud-%234285F4.svg?style=flat&logo=google-cloud&logoColor=white" alt="Google Cloud">
-                        <img src="https://img.shields.io/badge/Apache%20Kafka-000?style=flat&logo=apachekafka" alt="Apache Kafka">
+                        <!-- <img src="https://img.shields.io/badge/Apache%20Kafka-000?style=flat&logo=apachekafka" alt="Apache Kafka"> -->
                         <img src="https://img.shields.io/badge/cuda-000000.svg?style=flat&logo=nVIDIA&logoColor=green" alt="CUDA">
                         <img src="https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi" alt="FastAPI">
                         <img src="https://img.shields.io/badge/opencv-%23white.svg?style=flat&logo=opencv&logoColor=white" alt="OpenCV">
@@ -243,9 +262,9 @@
                         <img src="https://shields.io/badge/FFmpeg-%23171717.svg?logo=ffmpeg&style=flat&labelColor=171717&logoColor=5cb85c" alt="FFmpeg">
                         <img src="https://img.shields.io/badge/grafana-%23F46800.svg?style=flat&logo=grafana&logoColor=white" alt="Grafana">
                         <!-- <img src="https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=flat&logo=kubernetes&logoColor=white" alt="Kubernetes"> -->
-                        <img src="https://img.shields.io/badge/mosquitto-%233C5280.svg?style=flat&logo=eclipsemosquitto&logoColor=white" alt="Mosquitto">
+                        <!-- <img src="https://img.shields.io/badge/mosquitto-%233C5280.svg?style=flat&logo=eclipsemosquitto&logoColor=white" alt="Mosquitto"> -->
                         <img src="https://img.shields.io/badge/Postman-FF6C37?style=flat&logo=postman&logoColor=white" alt="Postman">
-                        <img src="https://img.shields.io/badge/-Raspberry_Pi-C51A4A?style=flat&logo=Raspberry-Pi" alt="Raspberry Pi">
+                        <!-- <img src="https://img.shields.io/badge/-Raspberry_Pi-C51A4A?style=flat&logo=Raspberry-Pi" alt="Raspberry Pi"> -->
                         <img src="https://img.shields.io/badge/nVIDIA-%2376B900.svg?style=flat&logo=nVIDIA&logoColor=white" alt="nVIDIA">
                     </div>
 
@@ -295,7 +314,16 @@
                             </div>
                             <p class="text-sm font-medium text-medium-text mb-2">Metrum AI, Austin, TX, USA</p>
                             <ul class="prose-basic text-xs text-medium-text list-disc pl-4 space-y-1.5">
-                                <li>Led chemical spill detection project (NVIDIA Isaac Sim, Nova Carter, Create XR) showcased at Dell Tech World 2024, increasing company outreach by 20%.</li>
+                                <li>
+                                    Led chemical spill detection project (NVIDIA Isaac Sim, Nova Carter, Create XR)
+                                    <a 
+                                    href="https://www.linkedin.com/posts/ugcPost-7198474761058803712-ugdi?utm_source=share&utm_medium=member_desktop&rcm=ACoAADVnPn0B0cCupR5RvMAQQjBbmInKZhwWHjs" 
+                                    target="_blank" 
+                                    class="text-primary underline hover:text-primary-400 transition-colors"
+                                    >
+                                    showcased at Dell Tech World 2024
+                                    </a>, increasing company outreach by 20%.
+                                </li>
                                 <li>Developed multimodal AI for automated drive-thru interactions.</li>
                                 <li>Built custom voice assistant using OpenAI Whisper & GStreamer (80-90% accuracy).</li>
                                 <li>Collaborated on LLM chatbots (including fine-tuned versions), boosting client efficiency by 30%.</li>
