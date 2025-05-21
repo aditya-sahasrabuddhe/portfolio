@@ -104,6 +104,13 @@
         .prose-basic a { color: theme('colors.primary.DEFAULT'); text-decoration: underline; }
         .prose-basic a:hover { color: theme('colors.primary.400'); }
         .prose-basic strong { font-weight: 600; color: theme('colors.light-text'); }
+        .projects section::-webkit-scrollbar {
+            height: 8px;
+        }
+        .projects section::-webkit-scrollbar-thumb {
+            background-color: #374151;
+            border-radius: 10px;
+        }
     </style>
 </head>
 
@@ -181,7 +188,7 @@
                     <li><button class="navbar-link active" data-nav-link>About</button></li>
                     <li><button class="navbar-link" data-nav-link>Experience</button></li>
                     <li><button class="navbar-link" data-nav-link>Education</button></li>
-                    <!-- <li><button class="navbar-link" data-nav-link>Projects</button></li> -->
+                    <li><button class="navbar-link" data-nav-link>Projects</button></li>
                     <li><button class="navbar-link" data-nav-link>Wellness & Adventure</button></li>
                     <li><button class="navbar-link" data-nav-link>Contact</button></li>
                 </ul>
@@ -393,6 +400,85 @@
                  <p class="text-center text-medium-text text-sm mt-8">More project details available upon request.</p>
             </article> -->
 
+            <article class="projects bg-dark-card border border-dark-border rounded-2xl p-5 lg:p-8 mb-6 shadow-lg relative" data-page="projects">
+                <header class="mb-6">
+                    <h2 class="text-2xl lg:text-3xl font-bold text-dark-heading article-title relative pb-2">Projects</h2>
+                </header>
+
+                <!-- Scroll Container + Navigation Arrows -->
+                <div class="relative">
+                    <!-- Left Arrow -->
+                    <button onclick="scrollProjects('left')" class="hidden md:flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-2 z-10 w-10 h-10 bg-dark-bg/30 backdrop-blur border border-dark-border rounded-full hover:bg-dark-bg hover:text-primary text-light-text transition-all shadow-lg">
+                    <ion-icon name="chevron-back-outline" class="w-6 h-6"></ion-icon>
+                    </button>
+
+                    <!-- Right Arrow -->
+                    <button onclick="scrollProjects('right')" class="hidden md:flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-2 z-10 w-10 h-10 bg-dark-bg/30 backdrop-blur border border-dark-border rounded-full hover:bg-dark-bg hover:text-primary text-light-text transition-all shadow-lg">
+                    <ion-icon name="chevron-forward-outline" class="w-6 h-6"></ion-icon>
+                    </button>
+
+                    <section id="project-scroll-container" class="overflow-x-auto scroll-smooth">
+                    <div class="flex space-x-6 snap-x snap-mandatory w-full pb-4">
+                        <!-- Project 1: PitchPerfect -->
+                        <div class="min-w-full snap-center bg-dark-bg border border-dark-border rounded-lg overflow-hidden shadow-lg relative">
+                        <div class="aspect-video bg-dark-border overflow-hidden">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/va2O2VBwE1o" title="PitchPerfect Demo" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <h4 class="text-xl font-semibold text-light-text">PitchPerfect: AI Interview Coach</h4>
+                            <p class="text-sm text-medium-text">Hackathon Project</p>
+                            <p class="text-base text-medium-text">AI mock interview tool giving feedback on relevance, sentiment, and confidence using Whisper, Ollama, and VADER.</p>
+                            <p class="text-sm text-medium-text"><span class="font-semibold text-primary">Stack:</span> Gradio, Whisper, Ollama, VADER</p>
+                            <div class="flex flex-wrap gap-4 text-sm mt-2">
+                            <a href="https://github.com/aditya-sahasrabuddhe/hackathon" target="_blank" class="text-primary underline hover:text-primary-400">GitHub</a>
+                            <a href="https://devpost.com/software/pitch-perfect-9hju2n" target="_blank" class="text-primary underline hover:text-primary-400">Devpost</a>
+                            <a href="https://www.youtube.com/watch?v=va2O2VBwE1o" target="_blank" class="text-primary underline hover:text-primary-400">Demo</a>
+                            </div>
+                            <details class="mt-4 text-sm text-medium-text cursor-pointer">
+                            <summary class="text-light-text font-medium">Read More</summary>
+                            <div class="mt-2 space-y-2">
+                                <p><strong>Inspiration:</strong> Job seekers lack accessible, AI-driven feedback for interview prep. PitchPerfect fills this gap with real-time, visual guidance.</p>
+                                <p><strong>Modes:</strong> Practice Mode for casual practice, Interview Mode for structured simulations.</p>
+                                <p><strong>Features:</strong> Visual scoring for Sentiment, Relevance, and Confidence. Interactive dashboard for tracking progress.</p>
+                                <p><strong>Challenges:</strong> Handling Whisper quirks (accents/noise) and fine-tuning relevance scoring using Ollama.</p>
+                                <p><strong>Achievements:</strong> End-to-end platform built in a day, modular open-source pipeline, usable by job seekers and recruiters alike.</p>
+                                <p><strong>What’s Next:</strong> AI interviewer mode, question bank by domain, growth tracking, and personalized feedback by role/industry.</p>
+                            </div>
+                            </details>
+                        </div>
+                        </div>
+
+                        <!-- Project 2: AimTrainer -->
+                        <div class="min-w-full snap-center bg-dark-bg border border-dark-border rounded-lg overflow-hidden shadow-lg relative">
+                        <img src="assets/images/aimtrainer.png" alt="AimTrainer Screenshot" class="w-full h-64 object-cover">
+                        <div class="p-6 space-y-3">
+                            <h4 class="text-xl font-semibold text-light-text">AimTrainer FPS Game</h4>
+                            <p class="text-sm text-medium-text">Personal Gaming Tool</p>
+                            <p class="text-base text-medium-text">3D FPS-style aim trainer built with Three.js to track hits, misses, and offer warm-up challenges for FPS gamers.</p>
+                            <p class="text-sm text-medium-text"><span class="font-semibold text-primary">Stack:</span> Three.js, GLTFLoader, WebGL, JS</p>
+                            <div class="flex flex-wrap gap-4 text-sm mt-2">
+                            <a href="https://github.com/aditya-sahasrabuddhe/AimTrainer" target="_blank" class="text-primary underline hover:text-primary-400">GitHub</a>
+                            <a href="https://aditya-sahasrabuddhe.github.io/AimTrainer/" target="_blank" class="text-primary underline hover:text-primary-400">Play Now</a>
+                            </div>
+                            <details class="mt-4 text-sm text-medium-text cursor-pointer">
+                            <summary class="text-light-text font-medium">Read More</summary>
+                            <div class="mt-2 space-y-2">
+                                <p>Designed for warming up before FPS games, the trainer uses immersive Pointer Lock API and real-time raycasting to detect hits.</p>
+                                <p>Targets appear at random distances and disappear if missed. Post-game performance tips encourage improvement.</p>
+                                <p>Built to practice 3D rendering, interactive gameplay logic, and ray-traced hit detection in web browsers.</p>
+                            </div>
+                            </details>
+                        </div>
+                        </div>
+                    </div>
+                    </section>
+                </div>
+
+                <p class="text-center text-medium-text text-sm mt-8">Swipe or use arrows to explore more projects.</p>
+            </article>
+
+
+
             <article class="contact bg-dark-card border border-dark-border rounded-2xl p-5 lg:p-8 mb-6 shadow-lg" data-page="contact">
                 <header class="mb-6">
                     <h2 class="text-2xl lg:text-3xl font-bold text-dark-heading article-title relative pb-2">Get In Touch</h2>
@@ -539,6 +625,17 @@
                   if(sidebar) sidebar.style.maxHeight = null;
              }
         });
+
+        function scrollProjects(direction) {
+            const container = document.getElementById("project-scroll-container");
+            const scrollAmount = container.offsetWidth;
+
+            if (direction === "right") {
+                container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+            } else {
+                container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+            }
+        }
     </script>
 
 </body>
